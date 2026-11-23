@@ -12,3 +12,5 @@ use App\Http\Controllers\MainController;
 // });
 
 Route::get('/', [MainController::class, 'beranda']);
+Route::get('/pokemon', [MainController::class, 'pokemon']);
+Route::get('/pokemon/{id}', [MainController::class, 'detailPokemon'])->whereNumber('id');

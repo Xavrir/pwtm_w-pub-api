@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger sticky-top">
         <div class="container-fluid px-5">
             <a class="navbar-brand" href="/"><b>Osol Pokédex</b></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,5 +85,9 @@
     </nav>
 
     @yield('content')
+
+    <script src="{{ asset('js/pagination.js') }}" defer></script>
+
+    @stack('scripts')
 </body>
 </html>
