@@ -4,6 +4,9 @@
 <div class="container py-5">
     <div class="mb-4">
         <h2 class="fw-bold">Tipe Pokémon</h2>
+        <p class="text-muted">
+            Jelajahi Pokémon berdasarkan tipenya.
+        </p>
     </div>
 
     <div class="row g-3 mb-4">
@@ -45,8 +48,8 @@
 
     <div id="typeList" class="row g-3"></div>
 </div>
-@endsection
 
 @push('scripts')
     <script src="{{ asset('js/tipe.js') }}" defer></script>
 @endpush
+@endsection

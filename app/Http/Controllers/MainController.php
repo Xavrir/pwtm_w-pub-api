@@ -25,4 +25,12 @@ class MainController extends Controller
     public function detailTipe($id){
         return view('pages.pokemon', compact('id'));
     }
+
+    public function generasi(){
+        return view('pages.generasi');
+    }
+
+    public function detailGenerasi($id){
+        return view('pages.pokemon', compact('id'));
+    }
 }

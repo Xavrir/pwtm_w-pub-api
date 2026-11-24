@@ -18,3 +18,6 @@ Route::get('/pokemon/{id}', [MainController::class, 'detailPokemon'])->whereNumb
 
 Route::get('/tipe', [MainController::class, 'tipe']);
 Route::get('/tipe/{id}', [MainController::class, 'detailTipe'])->whereNumber('id');
+
+Route::get('/gen', [MainController::class, 'generasi']);
+Route::get('/gen/{id}', [MainController::class, 'detailGenerasi'])->whereNumber('id');
