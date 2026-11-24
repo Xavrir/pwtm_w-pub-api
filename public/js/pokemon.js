@@ -8,6 +8,7 @@ let currentPage = 1;
 let currentSort = 'id-asc';
 let searchKeyword = '';
 let renderToken = 0;
+let activeRequestController = null;
 
 // Elemen HTML
 const pokemonList = document.getElementById('pokemonList');
@@ -20,8 +21,10 @@ const searchInput = document.getElementById('searchPokemon');
 const sortSelect = document.getElementById('sortPokemon');
 
 // Mengambil data dari API
-async function fetchData(url) {
-    const response = await fetch(url);
+async function fetchData(url, signal = null) {
+    const response = await fetch(url, {
+        signal: signal
+    });
 
     if (!response.ok) {
         throw new Error('Gagal mengambil data dari API');
@@ -104,6 +107,15 @@ function getFilteredPokemon() {
 
 // Menampilkan Pokémon
 async function renderPokemon() {
+    // Membatalkan request dari proses render sebelumnya
+    if (activeRequestController) {
+        activeRequestController.abort();
+    }
+
+    // Membuat pengendali request baru
+    const controller = new AbortController();
+    activeRequestController = controller;
+
     const token = ++renderToken;
 
     const filteredPokemon = getFilteredPokemon();
@@ -129,12 +141,7 @@ async function renderPokemon() {
     pokemonCount.textContent =
         `Menampilkan ${totalData} Pokémon`;
 
-    pageInfo.textContent =
-        `Halaman ${totalData === 0 ? 0 : currentPage} / ${totalPages}`;
-
-    prevButton.disabled = currentPage <= 1;
-    nextButton.disabled =
-        totalPages === 0 || currentPage >= totalPages;
+    renderPagination(currentPage, totalPages);
 
     if (totalData === 0) {
         return;
@@ -142,17 +149,37 @@ async function renderPokemon() {
 
     pokemonLoading.classList.remove('d-none');
 
-    // Mengambil detail Pokémon untuk halaman aktif
     const details = await Promise.all(
         currentPokemon.map(async pokemon => {
             try {
-                return await fetchData(pokemon.url);
+                return await fetchData(
+                    pokemon.url,
+                    controller.signal
+                );
+
             } catch (error) {
-                console.error(error);
+                if (error.name === 'AbortError') {
+                    console.log(
+                        `[Pokédex] Request dibatalkan: ${pokemon.name}`
+                    );
+
+                    return null;
+                }
+
+                console.error(
+                    `[Pokédex] Gagal mengambil data: ${pokemon.name}`,
+                    error
+                );
+
                 return null;
             }
         })
     );
+
+    // Menampilkan seluruh data yang berhasil diambil sekaligus
+    const successfulDetails = details.filter(detail => detail !== null);
+
+    console.log('[Pokédex] Seluruh data berhasil diambil:', successfulDetails);
 
     // Mencegah hasil render lama menimpa hasil terbaru
     if (token !== renderToken) return;

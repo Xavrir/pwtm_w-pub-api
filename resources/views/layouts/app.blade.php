@@ -19,11 +19,11 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Beranda</a>
+                        <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" aria-current="page" href="/">Beranda</a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="/pokemon">Pokémon</a>
+                        <a class="nav-link {{ request()->is('pokemon*') ? 'active' : '' }}" href="/pokemon">Pokémon</a>
                     </li>
                     
                     <li class="nav-item dropdown">
@@ -34,20 +34,6 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Normal</a></li>
                             <li><a class="dropdown-item" href="#">Fire</a></li>
-                            <li><a class="dropdown-item" href="#">dll</a></li>
-                            <!-- <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-                        </ul>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Habitat
-                        </a>
-                        
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Domestik</a></li>
-                            <li><a class="dropdown-item" href="#">Hutan</a></li>
                             <li><a class="dropdown-item" href="#">dll</a></li>
                             <!-- <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li> -->

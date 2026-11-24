@@ -56,9 +56,21 @@
             Sebelumnya
         </button>
 
-        <span id="pageInfo" class="fw-semibold">
-            Halaman 1
-        </span>
+        <div class="d-flex align-items-center gap-2">
+            <input
+                type="number"
+                id="pageInput"
+                class="form-control text-center"
+                style="width: 70px;"
+                value="1"
+                min="1"
+                disabled
+            >
+
+            <span id="totalPages" class="fw-semibold">
+                / 1
+            </span>
+        </div>
 
         <button id="nextPage" class="btn btn-outline-danger" disabled>
             Selanjutnya
