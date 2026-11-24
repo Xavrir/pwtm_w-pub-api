@@ -219,22 +219,6 @@ async function renderPokemon(data, maxPokemonId) {
         totalPokemon: maxPokemonId
     });
 
-    // Warna berdasarkan tipe Pokémon
-    const pokemonColor = getPokemonTypeColor(data.types);
-    const pokemonTextColor = getPokemonTextColor(data.types);
-
-    const pokemonHeader = document.getElementById('pokemonImage')
-        .closest('.row');
-
-    pokemonHeader.style.background = pokemonColor;
-    pokemonHeader.style.color = pokemonTextColor;
-    pokemonHeader.style.borderRadius = '16px';
-    pokemonHeader.style.padding = '20px';
-
-    document.getElementById('pokemonId').style.color = pokemonTextColor;
-    document.getElementById('pokemonGenus').style.color = pokemonTextColor;
-    document.getElementById('pokemonDescription').style.color = pokemonTextColor;
-
     // Identitas
     document.getElementById('pokemonId').textContent =
         `#${String(data.id).padStart(4, '0')}`;

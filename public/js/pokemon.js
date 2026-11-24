@@ -264,15 +264,19 @@ async function renderPokemon() {
         const types = detail?.types || [];
 
         const typeBadges = types.length > 0
-            ? types.map(type => `
-                <span class="badge me-1"
-                    style="
-                        background: ${getTypeColor(type)};
-                        color: ${getTypeTextColor(type)};
-                    ">
-                    ${escapeHTML(type)}
-                </span>
-            `).join('')
+            ? types.map(item => {
+                const typeName = item.type.name;
+
+                return `
+                    <span class="badge me-1"
+                        style="
+                            background: ${getTypeColor(typeName)};
+                            color: ${getTypeTextColor(typeName)};
+                        ">
+                        ${escapeHTML(typeName)}
+                    </span>
+                `;
+            }).join('')
             : '<span class="text-muted small">Tipe tidak tersedia</span>';
 
         pokemonList.innerHTML += `
