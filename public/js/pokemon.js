@@ -1,5 +1,9 @@
 
 const API_URL = 'https://pokeapi.co/api/v2/pokemon';
+const TYPE_API_URL = 'https://pokeapi.co/api/v2/type';
+
+const pokemonPage = document.getElementById('pokemonPage');
+const typeId = pokemonPage.dataset.typeId;
 
 const PAGE_SIZE = 12;
 
@@ -41,25 +45,57 @@ async function loadPokemon() {
     pokemonList.innerHTML = '';
 
     try {
-        // Mengambil jumlah total Pokémon
-        const meta = await fetchData(`${API_URL}?limit=1`);
+        if (typeId) {
+            // Mengambil Pokémon berdasarkan tipe
+            const data = await fetchData(`${TYPE_API_URL}/${typeId}`);
 
-        // Mengambil seluruh daftar Pokémon
-        const data = await fetchData(
-            `${API_URL}?limit=${meta.count}&offset=0`
-        );
+            allPokemon = data.pokemon.map(item => {
+                const pokemon = item.pokemon;
 
-        allPokemon = data.results.map(pokemon => {
-            const id = Number(
-                pokemon.url.match(/\/pokemon\/(\d+)\/?$/)[1]
+                const id = Number(
+                    pokemon.url.match(/\/pokemon\/(\d+)\/?$/)[1]
+                );
+
+                return {
+                    id: id,
+                    name: pokemon.name,
+                    url: pokemon.url
+                };
+            });
+
+            // Mengubah judul dan subtitle
+            const typeName = data.name
+                .split('-')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+
+            document.getElementById('pokemonTitle').textContent =
+                `Pokémon Tipe ${typeName}`;
+
+            document.getElementById('pokemonSubtitle').textContent =
+                `Temukan Pokémon dengan tipe ${typeName}`;
+
+        } else {
+            // Mengambil jumlah total Pokémon
+            const meta = await fetchData(`${API_URL}?limit=1`);
+
+            // Mengambil seluruh daftar Pokémon
+            const data = await fetchData(
+                `${API_URL}?limit=${meta.count}&offset=0`
             );
 
-            return {
-                id: id,
-                name: pokemon.name,
-                url: pokemon.url
-            };
-        });
+            allPokemon = data.results.map(pokemon => {
+                const id = Number(
+                    pokemon.url.match(/\/pokemon\/(\d+)\/?$/)[1]
+                );
+
+                return {
+                    id: id,
+                    name: pokemon.name,
+                    url: pokemon.url
+                };
+            });
+        }
 
         currentPage = 1;
 

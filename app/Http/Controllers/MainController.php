@@ -23,6 +23,6 @@ class MainController extends Controller
     }
 
     public function detailTipe($id){
-        return view('pages.detailTipe', compact('id'));
+        return view('pages.pokemon', compact('id'));
     }
 }

@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container py-4">
-    <div class="mb-4">
-        <h2 class="fw-bold">Pokémon</h2>
-        <p class="text-muted">
+    <div class="mb-4" id="pokemonPage" data-type-id="{{ $id ?? '' }}">
+        <h2 class="fw-bold" id="pokemonTitle">Pokémon</h2>
+        <p class="text-muted" id="pokemonSubtitle">
             Temukan berbagai Pokémon dari seluruh generasi.
         </p>
     </div>
