@@ -27,12 +27,12 @@
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle {{ request()->is('tipe*') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Tipe Elemen
                         </a>
                         
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Normal</a></li>
+                            <li><a class="dropdown-item" href="tipe/normal">Normal</a></li>
                             <li><a class="dropdown-item" href="#">Fire</a></li>
                             <li><a class="dropdown-item" href="#">dll</a></li>
                             <!-- <li><hr class="dropdown-divider"></li>
@@ -41,7 +41,7 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle {{ request()->is('gen*') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Generasi
                         </a>
                         
