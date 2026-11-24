@@ -91,6 +91,7 @@
 </div>
 
 @push('scripts')
+    <script src="{{ asset('js/typecolors.js') }}" defer></script>
     <script src="{{ asset('js/pagination.js') }}" defer></script>
     <script src="{{ asset('js/pokemon.js') }}" defer></script>
 @endpush

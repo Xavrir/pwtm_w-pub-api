@@ -150,5 +150,6 @@
     </div>
 </div>
 
+<script src="{{ asset('js/typecolors.js') }}" defer></script>
 <script src="{{ asset('js/detailPokemon.js') }}" defer></script>
 @endsection

@@ -261,11 +261,15 @@ async function renderPokemon() {
             detail?.sprites?.front_default ||
             `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
 
-        const types = detail?.types?.map(item => item.type.name) || [];
+        const types = detail?.types || [];
 
         const typeBadges = types.length > 0
             ? types.map(type => `
-                <span class="badge bg-secondary me-1">
+                <span class="badge me-1"
+                    style="
+                        background: ${getTypeColor(type)};
+                        color: ${getTypeTextColor(type)};
+                    ">
                     ${escapeHTML(type)}
                 </span>
             `).join('')

@@ -50,6 +50,7 @@
 </div>
 
 @push('scripts')
+    <script src="{{ asset('js/typecolors.js') }}" defer></script>
     <script src="{{ asset('js/tipe.js') }}" defer></script>
 @endpush
 @endsection

@@ -117,11 +117,18 @@ async function getSpeciesData(url) {
 function renderTypes(types) {
     const container = document.getElementById('pokemonTypes');
 
-    container.innerHTML = types.map(item => `
-        <span class="badge bg-secondary me-1 fs-6">
-            ${escapeHTML(formatName(item.type.name))}
-        </span>
-    `).join('');
+    container.innerHTML = types.map(item => {
+        const typeName = item.type.name;
+        const color = getTypeColor(typeName);
+        const textColor = getTypeTextColor(typeName);
+
+        return `
+            <span class="badge me-1 fs-6"
+                  style="background: ${color}; color: ${textColor};">
+                ${escapeHTML(formatName(typeName))}
+            </span>
+        `;
+    }).join('');
 }
 
 
@@ -211,6 +218,22 @@ async function renderPokemon(data, maxPokemonId) {
         species: species.rawData,
         totalPokemon: maxPokemonId
     });
+
+    // Warna berdasarkan tipe Pokémon
+    const pokemonColor = getPokemonTypeColor(data.types);
+    const pokemonTextColor = getPokemonTextColor(data.types);
+
+    const pokemonHeader = document.getElementById('pokemonImage')
+        .closest('.row');
+
+    pokemonHeader.style.background = pokemonColor;
+    pokemonHeader.style.color = pokemonTextColor;
+    pokemonHeader.style.borderRadius = '16px';
+    pokemonHeader.style.padding = '20px';
+
+    document.getElementById('pokemonId').style.color = pokemonTextColor;
+    document.getElementById('pokemonGenus').style.color = pokemonTextColor;
+    document.getElementById('pokemonDescription').style.color = pokemonTextColor;
 
     // Identitas
     document.getElementById('pokemonId').textContent =
