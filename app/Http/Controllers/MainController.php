@@ -23,7 +23,7 @@ class MainController extends Controller
     }
 
     public function detailTipe($id){
-        return view('pages.pokemon', compact('id'));
+        return view('pages.pokemon', ['typeId' => $id]);
     }
 
     public function generasi(){
@@ -31,6 +31,6 @@ class MainController extends Controller
     }
 
     public function detailGenerasi($id){
-        return view('pages.pokemon', compact('id'));
+        return view('pages.pokemon', ['generationId' => $id]);
     }
 }

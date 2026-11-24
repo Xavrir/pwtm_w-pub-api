@@ -1,9 +1,11 @@
 
 const API_URL = 'https://pokeapi.co/api/v2/pokemon';
 const TYPE_API_URL = 'https://pokeapi.co/api/v2/type';
+const GENERATION_API_URL = 'https://pokeapi.co/api/v2/generation';
 
 const pokemonPage = document.getElementById('pokemonPage');
 const typeId = pokemonPage.dataset.typeId;
+const generationId = pokemonPage.dataset.generationId;
 
 const PAGE_SIZE = 12;
 
@@ -63,7 +65,6 @@ async function loadPokemon() {
                 };
             });
 
-            // Mengubah judul dan subtitle
             const typeName = data.name
                 .split('-')
                 .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -74,6 +75,38 @@ async function loadPokemon() {
 
             document.getElementById('pokemonSubtitle').textContent =
                 `Temukan Pokémon dengan tipe ${typeName}`;
+
+        } else if (generationId) {
+            // Mengambil Pokémon berdasarkan generasi
+            const data = await fetchData(
+                `${GENERATION_API_URL}/${generationId}`
+            );
+
+            allPokemon = data.pokemon_species.map(species => {
+                const id = Number(
+                    species.url.match(/\/pokemon-species\/(\d+)\/?$/)[1]
+                );
+
+                return {
+                    id: id,
+                    name: species.name,
+                    url: `${API_URL}/${species.name}`
+                };
+            });
+
+            const regionName = data.main_region.name;
+            const formattedRegion = regionName.charAt(0).toUpperCase() +
+                regionName.slice(1);
+
+            const generationName = data.name
+                .split('-')[1]
+                .toUpperCase();
+
+            document.getElementById('pokemonTitle').textContent =
+                `Pokémon ${formattedRegion}`;
+
+            document.getElementById('pokemonSubtitle').textContent =
+                `Pokémon wilayah ${formattedRegion} (GENERASI-${generationName})`;
 
         } else {
             // Mengambil jumlah total Pokémon
@@ -98,13 +131,13 @@ async function loadPokemon() {
         }
 
         currentPage = 1;
-
         renderPokemon();
 
     } catch (error) {
         console.error(error);
         pokemonError.classList.remove('d-none');
         pokemonCount.textContent = 'Data gagal dimuat.';
+
     } finally {
         pokemonLoading.classList.add('d-none');
     }

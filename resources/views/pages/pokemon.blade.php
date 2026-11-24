@@ -2,13 +2,18 @@
 
 @section('content')
 <div class="container py-4">
-    <div class="mb-4" id="pokemonPage" data-type-id="{{ $id ?? '' }}">
-        @if(isset($id))
-            <a href="{{ url('/tipe') }}" class="btn btn-outline-dark mb-3">
+    <div class="mb-4"
+        id="pokemonPage"
+        data-type-id="{{ $typeId ?? '' }}"
+        data-generation-id="{{ $generationId ?? '' }}">
+
+        @if(isset($typeId) || isset($generationId))
+            <a href="{{ isset($typeId) ? url('/tipe') : url('/gen') }}"
+            class="btn btn-outline-dark mb-3">
                 <i class="bi bi-arrow-left"></i> Kembali
             </a>
         @endif
-        
+
         <h2 class="fw-bold" id="pokemonTitle">Pokémon</h2>
         <p class="text-muted" id="pokemonSubtitle">
             Temukan berbagai Pokémon dari seluruh generasi.
