@@ -72,8 +72,6 @@
 
     @yield('content')
 
-    <script src="{{ asset('js/pagination.js') }}" defer></script>
-
     @stack('scripts')
 </body>
 </html>
