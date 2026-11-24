@@ -317,3 +317,18 @@ nextButton.addEventListener('click', function () {
 
 // Jalankan
 loadPokemonDetail();
+
+const backButton = document.getElementById('backButton');
+
+backButton.addEventListener('click', () => {
+    const previousUrl = document.referrer;
+
+    if (
+        previousUrl &&
+        new URL(previousUrl).origin === window.location.origin
+    ) {
+        history.back();
+    } else {
+        window.location.href = '/pokemon';
+    }
+});

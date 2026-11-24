@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
-<div class="ps-5 pt-3">
-    <a href="/pokemon" class="btn btn-dark">
-        &larr; Kembali ke Pokémon
-    </a>
+<div class="container py-3">
+    <button type="button" id="backButton" class="btn btn-outline-dark">
+        <i class="bi bi-arrow-left"></i> Kembali
+    </button>
 </div>
 
 <div class="container py-3">

@@ -26,32 +26,12 @@
                         <a class="nav-link {{ request()->is('pokemon*') ? 'active' : '' }}" href="/pokemon">Pokémon</a>
                     </li>
                     
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ request()->is('tipe*') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Tipe Elemen
-                        </a>
-                        
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="tipe/normal">Normal</a></li>
-                            <li><a class="dropdown-item" href="#">Fire</a></li>
-                            <li><a class="dropdown-item" href="#">dll</a></li>
-                            <!-- <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('tipe*') ? 'active' : '' }}" href="/tipe">Tipe Elemen</a>
                     </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ request()->is('gen*') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Generasi
-                        </a>
-                        
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Gen 1</a></li>
-                            <li><a class="dropdown-item" href="#">Gen 2</a></li>
-                            <li><a class="dropdown-item" href="#">Gen Halilintar wkaowkaow</a></li>
-                            <!-- <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('gen*') ? 'active' : '' }}" href="/gen">Generasi</a>
                     </li>
             
                     <!-- <li class="nav-item">
