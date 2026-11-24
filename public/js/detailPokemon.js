@@ -48,19 +48,56 @@ function escapeHTML(value) {
 async function getSpeciesData(url) {
     try {
         const species = await fetchData(url);
+        let generationData = null;
 
+        // Mengambil genus
         const genus = species.genera.find(
             item => item.language.name === 'en'
         );
 
+        // Mengambil deskripsi
         const description = species.flavor_text_entries.find(
             item => item.language.name === 'en'
         );
 
+        // Mengambil informasi generasi
+        let generation = 'Unknown';
+
+        if (species.generation?.url) {
+            generationData = await fetchData(
+                species.generation.url
+            );
+
+            const generationName = species.generation.name
+                .replace('generation-', '')
+                .toUpperCase();
+
+            const region = generationData.main_region?.name;
+
+            generation = region
+                ? `Generasi ${generationName} - ${formatName(region)}`
+                : `Generasi ${generationName}`;
+        }
+
+        // Mengambil habitat
+        const habitat = species.habitat
+            ? formatName(species.habitat.name)
+            : 'Unknown';
+
         return {
             genus: genus?.genus || 'Unknown Species',
+
             description: description?.flavor_text
-                ?.replace(/[\n\f\r]+/g, ' ') || 'No description available.'
+                ?.replace(/[\n\f\r]+/g, ' ') ||
+                'No description available.',
+
+            generation: generation,
+            habitat: habitat,
+
+            rawData: {
+                species: species,
+                generation: generationData
+            }
         };
 
     } catch (error) {
@@ -68,7 +105,9 @@ async function getSpeciesData(url) {
 
         return {
             genus: 'Unknown Species',
-            description: 'Description unavailable.'
+            description: 'Description unavailable.',
+            generation: 'Unknown',
+            habitat: 'Unknown'
         };
     }
 }
@@ -167,6 +206,12 @@ async function renderPokemon(data, maxPokemonId) {
 
     const species = await getSpeciesData(data.species.url);
 
+    console.log('[Osol Pokédex] Data Detail Pokémon:', {
+        pokemon: data,
+        species: species.rawData,
+        totalPokemon: maxPokemonId
+    });
+
     // Identitas
     document.getElementById('pokemonId').textContent =
         `#${String(data.id).padStart(4, '0')}`;
@@ -186,6 +231,12 @@ async function renderPokemon(data, maxPokemonId) {
 
     document.getElementById('pokemonDescription').textContent =
         species.description;
+
+    document.getElementById('pokemonGeneration').textContent =
+        species.generation;
+
+    document.getElementById('pokemonHabitat').textContent =
+        species.habitat;
 
     document.title = `${formatName(data.name)} | Osol Pokédex`;
 

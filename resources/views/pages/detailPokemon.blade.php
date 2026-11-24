@@ -55,6 +55,30 @@
                    class="text-secondary">
                 </p>
 
+                <div class="row g-3 mt-2">
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <p class="text-muted mb-1">Generasi</p>
+                                <h5 id="pokemonGeneration" class="fw-bold mb-0">
+                                    -
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <p class="text-muted mb-1">Habitat</p>
+                                <h5 id="pokemonHabitat" class="fw-bold mb-0">
+                                    -
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
