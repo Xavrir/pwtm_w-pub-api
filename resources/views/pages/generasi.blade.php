@@ -23,8 +23,8 @@
         <div class="col-md-5">
             <select id="sortGeneration" class="form-select">
                 <option value="default">Urutan Default</option>
-                <option value="name-asc">Nama: A-Z</option>
-                <option value="name-desc">Nama: Z-A</option>
+                <option value="name-asc">Generasi: Ascending</option>
+                <option value="name-desc">Generasi: Descending</option>
             </select>
         </div>
     </div>
